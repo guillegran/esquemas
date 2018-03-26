@@ -1,0 +1,405 @@
+%        File: esquemas.tex
+%     Created: lun mar 26 05:00  2018 C
+% Last Change: lun mar 26 05:00  2018 C
+%
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, es-noquoting]{babel}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm, mathtools}
+\usepackage{tikz,tikz-cd}
+\usetikzlibrary{arrows, babel}
+\usepackage{url}
+\usepackage[colorlinks=true,linktocpage=true,pagebackref=true,linkcolor=blue]{hyperref}
+%\usepackage{titlesec}
+\usepackage{remreset}
+\usepackage{enumitem}
+\usepackage{titlepic}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{anyfontsize}
+
+%Fuente Palatino:
+%\usepackage[sc]{mathpazo}
+%Fuente Times:
+%\usepackage{newtxtext}
+%\usepackage{newtxmath}
+%Fuente Libertine:
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem{lema}{Lema}
+\newtheorem{corol}[thm]{Corolario}
+\theoremstyle{definition} \newtheorem{defn}[thm]{Definición}
+\theoremstyle{definition} \newtheorem{ejemplo}[thm]{Ejemplo}
+\theoremstyle{definition} \newtheorem{ejercicio}[thm]{Ejercicio}
+\theoremstyle{remark} \newtheorem*{obs}{Observación}
+
+
+\def\CC{\mathscr{C}}
+\def\sp{\mathrm{Spec}}
+\def\pp{\mathfrak{p}}
+\def\AA{\mathbb{A}}
+\def\ZZ{\mathbb{Z}}
+\def\RR{\mathbb{R}}
+\def\TT{\mathcal{T}}
+\def\NN{\mathbb{N}}
+\def\OO{\mathscr{O}}
+\def\mm{\mathfrak{m}}
+\def\id{\mathbf{1}}
+\def\cc{\mathbf{c}}
+\def\gf{\pi_1}
+\def\obj{\mathrm{Obj}}
+\def\cat{\mathbf{C}}
+\def\top{\mathbf{Top}}
+\def\htop{\mathbf{hTop}}
+        \def\grp{\mathbf{Grp}}
+	  \def\XX{\tilde{X}}
+	    \def\xx{\tilde{x}}
+	      \def\im{\mathrm{im}}
+	        \def\aut{\mathrm{Aut}}
+		  \def\DD{\mathrm{Deck}}
+		    \def\NR{\mathrm{N}}
+		      \def\ab{\mathrm{Ab}}
+
+		      \newcommand\cev[1]{\overset{\leftarrow}{#1}}
+		      \newcommand\gen[1]{\left\langle #1 \right\rangle}
+		      \newcommand\ngen[1]{\left\langle\left\langle #1 \right\rangle \right\rangle}
+
+		      \title{ Esquemas en geometría algebraica: Una introducción}
+		      \author{Guillermo Gallego Sánchez \\ Raúl González Molina}
+		      \date{\today}
+		      %\titlepic{\includegraphics{imagen.png}}
+
+%		      \renewcommand{\thesection}{\arabic{section}}
+
+		      %Otro formato para las secciones
+%		      \titleformat{\section}[block]
+%		      {\fontsize{15}{18}\bfseries\sffamily\filcenter}
+%		      {\S \thesection.}
+%		      {1em}
+%		      {}
+
+%		      \makeatletter
+%		      \@removefromreset{section}{chapter}
+%		      \makeatother
+
+\begin{document}
+\maketitle
+\section*{Introducción}
+En este trabajo vamos a dar una introducción a los esquemas, que constituyen la base de toda la geometría algebraica moderna. (\emph{continuar})
+\section{Conjuntos afines}
+Para empezar a motivar la idea de esquema, empezamos recordando los conceptos básicos de la geometría algebraica clásica, a saber, la idea de \emph{conjunto afín}. Consideramos un cuerpo $k$ y su espacio afín $n$-dimensional, que denotaremos $\AA_k^n$.
+\begin{defn}
+  Se llama \emph{conjunto afín} a un subconjunto de $\AA_k^n$ definido por los ceros de ciertos polinomios de $k[X_1,\dots,X_n]$. En otras palabras, dado cualquier subconjunto $S\subset k[X_1,\dots,X_n]$, se define el conjunto afín
+  \begin{equation*}
+    V(S)=\left\{ a\in \AA_k^n \vert f(a)=0 \ \forall f\in S \right\}.
+  \end{equation*}
+\end{defn}
+
+Nótese que, de hecho, si $I$ es el ideal generado por un subconjunto $S\subset k[X_1,\dots,X_n]$, entonces $V(S)=V(I)$. Por tanto, si $X\subset \AA_k^n$ es un conjunto afín, llamamos \emph{ideal de X} al ideal
+\begin{equation*}
+  I(X)=\left\{ f\in k[X_1,\dots,X_n] | f(a)=0 \ \forall a \in X \right\}.
+\end{equation*}
+El teorema de la base de Hilbert garantiza ahora que el ideal $I(X)$ es finitamente generado, de modo que $X$ queda determinado por un número finito de ecuaciones. Otra propiedad obvia es que $V$ invierte las inclusiones, es decir, si $S' \subset S\subset k[X_1,\dots,X_n]$, entonces $V(S)\subset V(S')$. 
+
+Veamos también que esta definición nos permite dar una topología en el espacio afín:
+\begin{prop}
+  Los conjuntos de la forma $V(I)$, donde $I$ es un ideal de $k[X_1,\dots,X_n]$, son los conjuntos cerrados de una topología en $\AA_k^n$, llamada la \emph{topología de Zariski}.
+\end{prop}
+
+\begin{proof}
+  En primer lugar, evidentemente $\varnothing=V(1)$ y $\AA^k_n=V(0)$. Ahora, si $\{I_{\alpha}\}$ es una familia de ideales de $k[X_1,\dots,X_n]$, entonces 
+  \begin{equation*}
+    \bigcap_{\alpha} V(I_{\alpha})=V\left( \bigcup_{\alpha}I_{\alpha} \right)=V\left( \sum_{\alpha}I_{\alpha} \right).
+  \end{equation*}
+
+  Por último, si $I$ y $J$ son ideales de $k[X_1,\dots,X_n]$, claramente como $IJ\subset I\cap J \subset I, J$ entonces $V(I)\cup V(J) \subset V(I\cap J) \subset V(IJ)$. Por otra parte, si $x\in V(IJ)$ y $x \not\in V(I)$, entonces existe un $f\in I$ con $f(x)\neq 0$ y, para todo $g\in J$, tenemos $fg\in IJ$, luego $f(x)g(x)=(fg)(x)=0$. Por tanto, $g(x)=0$ y $x\in V(J)$. Es decir, hemos probado que 
+\begin{equation*}
+  V(I)\cup V(J)=V(I\cap J)=V(IJ).
+  \end{equation*}
+\end{proof}
+
+La topología de Zariski en el espacio afín no es en general $T_2$ aunque sí que es $T_1$. En efecto, los conjuntos unipuntuales son cerrados ya que, si $x=(x_1,\dots,x_n)\in \AA_k^n$ es un punto del espacio afín entonces $\{x\}=V(\mm_x)$, donde $\mm_x=(X_1-x_1,\dots,X_n-x_n)$ es el núcleo del homomorfismo evaluación
+\begin{align*}
+  \mathrm{ev}_x :k[X_1,\dots,X_n]&\longrightarrow k\\ 
+    f &\longmapsto f(x). 
+  \end{align*}
+
+  Lo siguiente que cabe plantearse es que, si esperamos obtener la información de un conjunto afín $X$ a partir de $I(X)$, ¿cómo podemos determinar cuál es este ideal y sus generadores? Para dar una respuesta, comencemos por recordar la siguiente definición:
+  \begin{defn}
+    Se llama \emph{radical de un ideal I} de un anillo $R$ a
+    \begin{equation*}
+      \sqrt{I}=\left\{ f\in R | f^r\in I \text{ para algún } r \in \NN \right\}.
+    \end{equation*}
+  Un ideal $I\subset R$ se dice \emph{ideal radical} si $\sqrt{I}=I$.
+  \end{defn}
+
+  \begin{thm}[Teorema de los ceros de Hilbert]
+    Sean $k$ un cuerpo algebraicamente cerrado, $S\subset k[X_1,\dots,X_n]$ y $X=V(S)\subset \AA_k^n$. Entonces, si $I$ es el ideal generado por $S$ en $k[X_1,\dots,X_n]$, se tiene $I(X)=\sqrt{I}$.
+  \end{thm}
+  En particular, el teorema de los ceros nos da una correspondencia
+  \begin{center}
+    \begin{tikzcd}
+      \{\text{ideales radicales } I \subset k[X_1,\dots,X_n]\} \arrow{rr}{I\mapsto V(I)} && \{\text{subconjuntos cerrados } X \subset \AA^n_k\} \arrow{ll}{I(X)\mapsfrom X}     
+    \end{tikzcd}
+  \end{center}
+  tal que al restringir obtenemos una biyección
+  \begin{center}
+    \begin{tikzcd}
+      \{\text{ideales maximales de } k[X_1,\dots,X_n]\} \arrow{r}{} & \{\text{puntos de } \AA^n_k\} \arrow{l}{}     
+    \end{tikzcd}
+  \end{center}
+  A partir de aquí, salvo que se diga lo contrario, $k$ será siempre un cuerpo algebraicamente cerrado.
+
+  Es algo común en geometría decir cuándo un conjunto es \emph{irreducible}. Por ejemplo, diríamos que una recta es irreducible, pero una recta doble o un par de rectas sí, pues puede escribirse como «unión» o, algebraicamente, «producto» de las rectas que la componen. 
+  \begin{defn}
+  Decimos que un espacio topológico $X$ es \emph{irreducible} si $X$ no puede ser expresado como una unión de dos subconjuntos cerrados propios. 
+\end{defn}
+  \begin{prop}
+    Un subconjunto cerrado $X\subset \AA_k^n$ es irreducible si y sólo si $I(X)$ es un ideal primo. En particular $\AA_k^n$ es irreducible.
+  \end{prop}
+  \begin{proof}
+    Como cualquier conjunto cerrado puede verse como una intersección de conjuntos de la forma $V(f)$, que $X$ sea irreducible es equivalente a que, para cada par de elementos $f,g\in k[X_1,\dots,X_n]$, con $X\subset V(f)\cap V(g)=V(fg)$ tengamos $X\subset V(f)$ o $X \subset V(g)$. Pero esto significa precisamente que para cualesquiera dos polinoimos $f$ y $g$ con $fg\in I(X)$, tengamos $f\in I(X)$ o $g\in I(X)$, esto es, que $I(X)$ sea un ideal primo.
+  \end{proof}
+  De nuevo, al restringir la correspondencia dada por el teorema de los ceros obtenemos una biyección
+  \begin{center}
+    \begin{tikzcd}
+      \{\text{ideales primos de } k[X_1,\dots,X_n]\} \arrow{r}{} & \{\text{subconjuntos cerrados irreducibles de } \AA^n_k\} \arrow{l}{}     
+    \end{tikzcd}
+  \end{center}
+
+  Por último, consideramos la noción de \emph{morfismo de conjuntos afines}.
+  \begin{defn}
+    Dados dos conjuntos afines $X\subset \AA^m_k$ e $Y\subset \AA^n_k$, un morfismo $X\rightarrow Y$ de conjuntos afines es una aplicación $f:X\rightarrow Y$ en los conjuntos correspondientes tal que existan unos polinomios $f_1,\dots,f_n\in k[X_1,\dots,X_n]$ tales que $f(x)=(f_1(x),\dots,f_n(x))$ para todo $x\in X$.
+\end{defn}
+
+La definición muestra que un morfismo de conjuntos afines siempre se puede extender a un morfismo entre los espacios afines que los contienen. Si $f=(f_1,\dots,f_n)$, con $f_i \in k[X_1,\dots,X_m]$ define un morfismo $\AA^m_k\rightarrow \AA^n_k$, obtenemos un homomorfismo de $k$-álgebras $\Gamma(f):k[Y_1,\dots,Y_n] \rightarrow k[X_1,\dots,X_n]$ que envía cada $Y_i$ a $f_i$. Ahora, para cada cerrado $V(I)\subset \AA^n_k$, $f^{-1}(V(I))=V(\Gamma(f)(I))$ que es de nuevo cerrado. Por tanto, los morfismos de conjuntos afines son aplicaciones continuas (en las topologías de Zariski de cada conjunto).
+
+Ahora, si tenemos tres conjuntos afines $X$, $Y$ y $Z$ y $f:X\rightarrow Y$ y $g:Y\rightarrow Z$ son morfismos dados por los polinomios $f_1,\dots,f_n\in k[X_1,\dots,X_m]$ y $g_1,\dots,g_r \in k[Y_1,\dots,Y_n]$, entonces tenemos, para $x\in X$,
+\begin{equation*}
+  g\circ f(x)=g(f(x))=(g_1(f_1(x),\dots,f_n(x)),\dots,g_r(f_1(x),\dots,f_n(x))).
+\end{equation*}
+De modo que $g\circ f:X\rightarrow Z$ es de nuevo un morfismo de conjuntos afines. Por tanto, los conjuntos afines forman una categoría, que denotaremos $\mathbf{AffSets}$.
+
+La noción de conjunto afín es útil a la hora de hacer geometría algebraica pero presenta algunas desventajas. En primer lugar, los subconjuntos abiertos de los conjuntos afines no heredan la estructura de conjunto afín de forma natural. Las intersecciones de conjuntos afines son cerradas y de nuevo son conjuntos afines, sin embargo no podemos distinguir casos que son geométricamente distintos. Por ejemplo, no podemos distinguir los conjuntos $V(X)\cup V(Y) \subset \AA^2_k$ y $V(Y)\cup V(X^2-Y) \subset \AA^2_k$, aunque claramente el primero representa un corte normal entre dos rectas y el segundo una intersección de una curva con una tangente suya en el punto de tangencia. Los conjuntos afines no ayudan a la hora de estudiar soluciones de ecuaciones polinomiales en anillos más generales que los cuerpos algebraicamente cerrados, por ejemplo, en $\ZZ$. 
+
+El primer problema se debe a que los conjuntos algebraicos están necesariamente inmersos en un espacio afín. El segundo y el tercero son más complicados y son una fuerte motivación para definir la noción de \emph{esquema}.
+
+  \section{El anillo de coordenadas afines}
+   Vamos a estudiar ahora el \emph{anillo de coordenadas afines}, que nos proporciona una primera idea de la «dualidad» existente entre álgebra y geometría. Sea $X\subset \AA^n_k$ un subconjunto cerrado. Cada polinomio $f\in k[X_1,\dots,X_n]$ induce un morfismo de conjuntos algebraicos
+  \begin{align*}
+     X&\longrightarrow \AA^1_k\\ 
+      x &\longmapsto f(x). 
+    \end{align*} 
+    A los elementos de $k$ les asociamos la función constante correspondiente. 
+    Ahora, el conjunto $\mathbf{AffSets}(X,\AA^1_k)$ tiene de forma natural la estructura de un $k$-álgebra, con la suma $(f+g)(x)=f(x)+g(x)$ y el producto $(fg)(x)=f(x)g(x)$. La aplicación $k[X_1,\dots,X_n]\rightarrow \mathbf{AffSets}(X,\AA^1_k)$, que a cada polinomio le asigna el correspondiente morfismo de conjuntos algebraicos que acabamos de dar es un homomorfismo sobreyectivo de $k$-álgebras cuyo núcleo es $I(X)$. Por el teorema de isomorfía
+    \begin{equation*}
+      k[X_1,\dots,X_n]/I(X) \cong \mathbf{AffSets}(X,\AA^1_k).
+    \end{equation*}
+    Decimos entonces que $k[X_1,\dots,X_n]/I(X)$ es el \emph{anillo de coordenadas afines} de $X$ y lo denotamos por $\Gamma(X)$.
+      
+    Si consideramos ahora un punto $x=(x_1,\dots,x_n)\in X$ y el ideal
+    \begin{equation*}
+      \mm_x=\left\{ f\in \Gamma(X) | f(x)=0 \right\}\subset \Gamma(X).
+    \end{equation*}
+    El ideal $\mm_x$ es la imagen del ideal maximal $(X_1-x_1,\dots,X_n-x_n)$ por la correspondencia anterior. Además, $\mm_x$ es el núcleo del homomorfismo evaluación y, como este homomorfismo es sobreyectivo y $\mm_x$ es un ideal maximal tenemos que $\Gamma(X)/\mm_x=k$.
+
+    Teniendo en cuenta el anillo de coordenadas afines, veamos ahora como se induce la topología de Zariski en $X$. Si $I\subset \Gamma(X)$ es un ideal, podemos considerar
+    \begin{equation*}
+      V(I)=\left\{ x\in X| f(x)=0 \ \forall f\in I \right\}=V(\pi^{-1}(I))\cap X,
+    \end{equation*}
+    donde $\pi:k[X_1,\dots,X_n]\rightarrow \Gamma(X)$ es la proyección canónica al cociente. De nuevo, los $V(I)$ son precisamente los subconjuntos cerrados de $X$ en la topología inducida por la topología de Zariski, que otra vez llamamos \emph{topología de Zariski}. Ahora, dado $f\in \Gamma(X)$ los conjuntos 
+    \begin{equation*}
+      D(f)=\left\{ x\in X|f(x)\neq 0 \right\}=X\setminus V(f)
+    \end{equation*}
+    son abiertos de $X$ y se llaman \emph{abiertos principales}.
+
+    \begin{prop}
+      Los abiertos principales de X forman una base de $X$ con la topología de Zariski.
+    \end{prop}
+    \begin{proof}
+      Claramente $D(f)\cap D(g)=D(fg)$ para $f,g \in \Gamma(X)$. Ahora, si $U\subset X$ es un abierto, entonces $U=X\setminus V(I)$ para algún ideal $I$. Si tomamos ahora unos generadores $f_1,\dots,f_n$ de este ideal, tenemos que $V(I)=\bigcap_{i=1}^n V(f_i)$ y $U=\bigcup_{i=1}^n D(f_i)$.
+    \end{proof}
+    
+    Veamos ahora como el anillo de coordenadas afines nos permite obtener una dualidad entre álgebra y geometría en el caso de los conjuntos afines. 
+    \begin{prop}
+      Sea $X$ un conjunto afín. El anillo de coordenadas afín $\Gamma(X)$ es una $k$-álgebra finitamente generada y reducida (que no tiene elementos nilpotentes distintos de $0$). Más aún, $X$ es irreducible si y sólo si $\Gamma(X)$ es un dominio de integridad.
+    \end{prop}
+    \begin{proof}
+      Como $\Gamma(X)=k[X_1,\dots,X_n]/I(X)$, es finitamente generada. Como $I(X)$ es radical, entonces $\Gamma(X)$ es reducida (\textbf{se verá en conmutativa??}). Además, $X$ es irreducible si y sólo si $I(X)$ es primo, pero $I(X)$ es primo si y sólo si $\Gamma(X)$ es un dominio de integridad.
+    \end{proof}
+
+    De hecho, si consideramos la categoría $\mathbf{RedFinAlg}_k$ de las álgebras finitamente generadas y reducidas sobre $k$, podemos definir un functor
+    \begin{align*}
+      \Gamma : \mathbf{AffSets}^{op}&\longrightarrow \mathbf{RedFinAlg}_k.
+      \end{align*}
+
+      \begin{prop}
+	El functor $\Gamma$ da una equivalencia de categorías. Restringiendo obtenemos inmediatamente la equivalencia
+	\begin{equation*}
+	  \mathbf{IrrAffSets}^{op} \longleftrightarrow \mathbf{IntFinAlg}_k,
+	\end{equation*}
+	donde $\mathbf{IrrAffSets}$ denota la categoría de los conjuntos afines irreducibles y $\mathbf{IntFinAlg}_k$ la de las $k$-álgebras finitamente generadas que sean dominios de integridad.
+      \end{prop}
+
+      \begin{proof}
+	En primer lugar, tenemos que ver que, si $X\subset \AA^m_k$ e $Y\subset \AA^n_k$ son conjuntos afines la aplicación $\Gamma: \mathbf{AffSets}(X,Y) \rightarrow \mathbf{AffSets}(\Gamma(X),\Gamma(Y))$ es biyectiva. Esto lo haremos construyendo la aplicación inversa. Dada $\varphi:\Gamma(Y) \rightarrow \Gamma(X)$, existe un homomorfismo $\tilde \varphi$ de $k$-álgebras tal que el siguiente diagrama conmuta
+	\begin{center}
+	  \begin{tikzcd}
+	    k[Y_1,\dots,Y_n]	    \arrow{rr}{\tilde \varphi}\arrow{dd}[anchor=east]{} && k[X_1,\dots,X_m]\arrow{dd}[anchor=west]{} \\ 
+	     && \\
+	     \Gamma(Y)\arrow{rr}[anchor=south]{\varphi} && \Gamma(X).
+	   \end{tikzcd}
+	 \end{center}
+	 Si definimos 
+	 \begin{align*}
+	   X&\longrightarrow Y\\ 
+	     x &\longmapsto (\tilde\varphi(Y_1)(x),\dots,\tilde\varphi(Y_n)(x)),
+	   \end{align*}
+	   obtenemos la aplicación inversa que buscábamos.
+
+	   Falta ver ahora que para cada $k$-álgebra finitamente generada y reducida existe un conjunto afín $X$ tal que $A\cong \Gamma(X)$. Por hipótesis, $A$ es isomorfo a $k[X_1,\dots,X_n]/I$, con $I$ un ideal radical (\textbf{y esto??}). Si hacemos $X=V(I)\subset \AA^n_k$, tenemos $\Gamma(X)=k[X_1,\dots,X_n]/I$.
+      \end{proof}
+
+      Finalmente, este functor nos da también una descripción de los morfismos de conjuntos afines.
+      \begin{prop}
+	Sea $f:X\rightarrow Y$ un morfismo de conjuntos afines y sea $\Gamma(f):\Gamma(Y)\rightarrow \Gamma(X)$ el correspondiente homomorfismo de los anillos de coordenadas afines. Entonces $\Gamma(f)^{-1}(\mm_x)=\mm_{f(x)}$ para todo $x\in X$.
+      \end{prop}
+      \begin{proof}
+	Se sigue inmediatamente del hecho de que $g(f(x))=\Gamma(f)(g)(x)$ para $g\in \Gamma(Y)=\mathbf{AffSets}(Y,\AA^1_k)$.
+      \end{proof}
+
+      \section{Espacios con funciones}
+      Una idea central a toda la geometría algebraica es la de pensar en los objetos geométricos como \emph{espacios con funciones} y estudiar las propiedades de estas funciones, proporcionando así otra «dualidad» entre álgebra y geometría. 
+
+      \begin{defn}
+	Sea $K$ un cuerpo. \\
+	(1) Un \emph{espacio con funciones} sobre $K$ es un par $(X,\OO_X)$ (que normalmente denotaremos solo por $X$), donde $X$ es un espacio topológico y $\OO_X$ es  una familia de $K$-subálgebras $\OO_X(U)\subset \mathbf{Sets}(U,K)$ para cada subconjunto abierto $U\subset X$ que satisface las siguientes propiedades:
+	\begin{enumerate}
+	  \item[(a)] Si $V\subset U\subset X$ son abiertos y $f\in \OO_X(U)$, la restricción $f|_{V}\in \mathbf{Sets}(V,K)$ es un elemento de $\OO_X(V)$.
+	  \item[(b)] (Axioma de pegado). Dada una familia de abiertos $U_{\alpha}\subset X$ y $f_{\alpha}\in \OO_X(U_{\alpha})$, con 
+	    \begin{equation*}
+	      f_{\alpha}|_{U_{\alpha}\cap U_{\beta}}=f_{\beta}|_{U_{\alpha}\cap U_{\beta}} \ \forall \alpha, \beta,
+	    \end{equation*}
+	    entonces la única función $f:\bigcup_{\alpha}U_{\alpha}\rightarrow K$ con $f|_{U_{\alpha}}=f_{\alpha}$ para todo $\alpha$ está en $\OO_X(\bigcup_{\alpha}U_{\alpha})$.
+	\end{enumerate}
+	(2) Un morfismo $g:(X,\OO_X)\rightarrow (Y,\OO_Y)$ de espacios con funciones es una aplicación continua $g:X\rightarrow Y$ tal que, para todos los subconjuntos abiertos $U\subset Y$ y para todas las funciones $f\in \OO_Y(U)$ la función $f\circ g |_{g^{-1}(U)}:g^{-1}(U)\rightarrow K$ está en $\OO_{X}(g^{-1}(U))$.
+	
+      \end{defn}
+      Claramente, los espacios con funciones sobre $K$ forman una categoría, que denotaremos $\mathbf{FunSp}_K$.
+      \begin{defn}
+	Sea $X$ un espacio con funciones y sea $U\subset X$ abierto. Denotamos por $(U,\OO_{X|U})$ el espacio $U$ con funciones $\OO_{X|U}(V)=\OO_X(V)$, para $V\subset U$ abierto.
+      \end{defn}
+      A partir de ahora, salvo que se diga lo contrario, solo consideraremos espacios de funciones sobre el cuerpo algebraicamente cerrado $k$.
+
+      Sea ahora un conjunto afín irreducible $X\subset A^n_k$. Vamos a dotar a $X$ de la estructura de espacio con funciones. 
+      \begin{defn}
+	El cuerpo de fracciones $K(X)=\mathrm{qf}(\Gamma(X))$ se llama el \emph{cuerpo de funciones} de $X$.
+      \end{defn}
+      Si consideramos $\Gamma(X)=\mathbf{AffSets}(X,\AA^1_k)$ como el conjunto de morfismos $X\rightarrow \AA^1_k$, los elementos del cuerpo de funciones $\frac{f}{g}$, $f,g \in \Gamma(X)$, $g\neq 0$ en general no definen funciones en $X$ porque el denominador puede anularse en $X$. Sin embargo, $\frac{f}{g}$ sí que define una función $D(g)\rightarrow \AA^1_k$. Esta es la idea que seguiremos para dar a $X$ la estructura de espacio con funciones.
+
+      \begin{defn}
+	Sea $X$ un conjunto afín irreducible y sea $U\subset X$ abierto. Denotamos por $\mm_x$ el ideal maximal de $\Gamma(X)$ correspondiente a un punto $x\in X$ y por $\Gamma(X)_{\mm_x}$ la localización del anillo de coordenadas afines con respecto a $\mm_x$. Definimos
+	\begin{equation*}
+	  \OO_X(U)=\bigcap_{x\in U}\Gamma(X)_{\mm_x}\subset K(X).
+	\end{equation*}
+      \end{defn}
+      La localización $\Gamma(X)_{\mm_x}$ puede verse en este caso como la unión
+      \begin{equation*}
+	\Gamma(X)_{\mm_x}=\bigcup_{f\in \Gamma(X)\setminus \mm_{x}} \Gamma(X)_{f} \subset K(X).
+      \end{equation*}
+
+      Para considerar $(X,\OO_X)$ como un espacio con funciones tenemos que explicar como identificar los elementos de $f\in \OO_X(U)$ con funciones $U\rightarrow k$. Dado $x\in U$ el elemento $f$ está por definición en $\Gamma(X)_{\mm_x}$ y podemos escribir $f=\frac{g}{h}$ con $g,h\in \Gamma(X)$, $h\not\in \mm_x$. Pero entonces $h(x)\neq 0$ y podemos hacer $f(x)=\frac{g(x)}{h(x)}\in k$. Tenemos entonces una aplicación inyectiva $\OO_X(U)\rightarrow \mathbf{Sets}(U,k)$.
+      Si $V\subset U\subset X$ son abiertos tenemos $\OO_X(U)\subset \OO_X(V)$por definición y, por medio de la correspondencia anterior, la inclusión se corresponde con la restricción de funciones. Por otra parte, el axioma de pegado se verifica al ver los álgebras $\OO_X(U)$ como subconjuntos del cuerpo de funciones $K(X)$. Decimos entonces que $(X,\OO_X)$ es el \emph{espacio con funciones asociado a $X$}. Además, podemos ver las funciones en los abiertos principales $D(f)$ explícitamente como sigue.
+      \begin{prop}
+	Sea $(X,\OO_X)$ el espacio de funciones asociado al conjunto afín irreducible $X$ y sea $f\in \Gamma(X)$. Entonces $\OO_X(D(f))=\Gamma(X)_f$. En particular $\OO_X(X)=\Gamma(X)$.
+      \end{prop}
+      \begin{proof}
+	Claramente $\Gamma(X)_f\subset \OO_X(D(f))$. Sea $g\in \OO_X(D(f))$ y fijamos
+	\begin{equation*}
+	  I=\left\{ h\in \Gamma(X)|hg\in \Gamma(X) \right\}.
+	\end{equation*}
+	Obviamente $I$ es un ideal de $\Gamma(X)$ y tenemos que probar que $f\in \sqrt{I}$. Por el teorema de los ceros tenemos $\sqrt{I}=I(V(I))$. Por tanto, basta probar que $f(x)=0$ para todo $x\in V(I)$. Sea $x\in X$ un punto con $f(x)\neq 0$, es decir, $x\in D(f)$. Como $g\in \OO_X(D(f))$, podemos tomar $g_1,g_2 \in \Gamma(X)$, $g_2\not\in \mm_x$, con $g=\frac{g_1}{g_2}$. Por tanto, $g_2\in I$, y como $g_2(x)\neq 0$ tenemos que $x\not\in V(I)$.
+      \end{proof}
+
+      \begin{prop}
+	Sean $X$ e $Y$ conjuntos afines irreducibles y $f:X\rightarrow Y$ una aplicación. Las siguientes afirmaciones son equivalentes.
+	\begin{enumerate}
+	  \item La aplicación $f$ es un morfismo de conjuntos afines.
+	  \item Si $g\in \Gamma(Y)$ entonces $g\circ f \in \Gamma(X)$.
+	  \item La aplicación $f$ es un morfismo de espacios con funciones.
+	\end{enumerate}
+      \end{prop}
+
+      \begin{proof}
+	La equivalencia entre las dos primeras afirmaciones ya se ha visto. Por otro lado, que la tercera implica la segunda es inmediato si tomamos $U=Y$. Veamos el recíproco. Sea $\varphi:\Gamma(Y)\rightarrow \Gamma(X)$ el homomorfismo $h\mapsto h\circ f$. Para $g\in \Gamma(Y)$ tenemos 
+	\begin{equation*}
+	  f^{-1}(D(g))=\left\{ x\in X | g(f(x))\neq 0 \right\}=D(\varphi(g)).
+	\end{equation*}
+      Como los abiertos principales forman una base de la topología, esto muestra que $f$ es continua. Ahora, el homomorfismo $\varphi$ induce un homomorfismo en las localizaciones de la forma
+      \begin{align*}
+	 \OO_Y(D(g))&\longrightarrow \OO_X(D(\varphi(g)))\\ 
+	  h &\longmapsto h\circ f. 
+	\end{align*}
+	Esto prueba el resultado si $U$ es un abierto principal. Para generalizarlo a un abierto cualquiera basta pegar las funciones en los abiertos principales.
+      \end{proof}
+      En resumen, obtenemos el siguiente teorema:
+      \begin{thm}
+	La construcción precedente $X\mapsto (X,\OO_X)$ define un functor completamente fiel (\textbf{fully faithful se traduce así?})
+	\begin{equation*}
+	  \mathbf{IrrAffSets} \longrightarrow \mathbf{FunSp}_k.
+	\end{equation*}
+      \end{thm}
+
+      Finalmente, podemos dar una buena definición de lo que entendemos por \emph{variedades afines}. Entenderemos por una \emph{variedad} un espacio con funciones que admita un «atlas» finito de variedades afines, de forma análoga a como haríamos en geometría diferencial (de hecho también es posible ver las variedades diferenciables como espacios de funciones diferenciables sobre $\RR$).
+      \begin{defn}\leavevmode
+	\begin{enumerate}
+      \item Una \emph{variedad afín} es un espacio con funciones isomorfo a al espacio de funciones asociado a un conjunto afín irreducible.
+      \item Una \emph{variedad} es un espacio con funciones $(X,\OO_X)$ conexo (como espacio topológico) y con la propiedad de que existe un recubrimiento finito $X=\bigcup_{i=1}^nU_i$ tal que el espacio con funciones $(U_i,\OO_{X|U_i})$ es una variedad afín para todo $i=1,\dots,n$.
+    \end{enumerate}
+      \end{defn}
+
+      \section{Esquemas afines}
+      La teoría de esquemas surge a la hora de generalizar la idea de variedad a anillos más generales que los cuerpos algebraicamente cerrados. Para ello, dado un anillo $R$, tenemos que construir un espacio topológico $X$ y un conjunto de funciones $\OO_X$ que nos pueda hacer ahora las veces de «espacio afín» asociado a $R$.
+
+      Comencemos por estudiar el espacio topológico que vamos a asociar a cada anillo, que no será otra cosa que su \emph{espectro}.
+      \begin{defn}
+	Sea $R$ un anillo. Definimos el \emph{espectro de R} como el conjunto
+	\begin{equation*}
+	  \sp(R)=\left\{\pp \subset R | \pp \text{ es ideal primo de } R  \right\}. 
+	\end{equation*}
+	Definimos la \emph{topología de Zariski} sobre $\sp(R)$ como aquella cuyos cerrados son los conjuntos de la forma
+	\begin{equation*}
+	  V(I)=\left\{ \pp \in \sp(R) | I\subset \pp \right\},
+	\end{equation*}
+	donde $I$ es un ideal de $R$. Llamamos \emph{abiertos principales} de $R$ a los conjuntos de la forma
+	\begin{equation*}
+	  D(f)=\left\{ \pp \in \sp(R)| f \not\in \pp \right\}=\sp(R) \setminus V(f).
+	\end{equation*}
+	Es fácil ver que los abiertos principales forman una base de la topología de Zariski.
+      \end{defn}
+
+      En este caso, la topología de Zariski no es en general $T_2$, pero ni siquiera es en general $T_1$. De hecho, la adherencia de los conjuntos unipuntuales $\left\{ \pp \right\}$ con $\pp \in \sp(R)$ es $\bar{\{\pp\}}=V(\pp)$.
+
+      Nótese ahora que, si $f:R\rightarrow S$ es un homomorfismo entre dos anillos $R$ y $S$, la aplicación inducida
+      \begin{align*}
+	f_* :\sp(S)&\longrightarrow \sp(R)\\ 
+	\pp &\longmapsto f^{-1}(\pp), 
+	\end{align*}
+	es continua. Además, claramente $(f\circ g)_*(\pp)=g_*\circ f_*(\pp)$. Por tanto hay un functor contravariante
+	\begin{equation*}
+	  \sp: \mathbf{Ring} \longrightarrow \mathbf{Top},
+	\end{equation*}
+	que a cada anillo $R$ le asigna $\sp(R)$ y a cada homomorfismo de anillos $f:R\rightarrow S$ le asigna la aplicación continua $f_*:\sp(S)\rightarrow \sp(R)$.
+
+      
+\end{document}
+
+
+
