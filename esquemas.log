@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.3)  27 MAR 2018 14:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.3)  27 MAR 2018 18:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1470,7 +1470,7 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
-Overfull \hbox (0.4733pt too wide) in paragraph at lines 363--364
+Overfull \hbox (0.4733pt too wide) in paragraph at lines 381--382
 [][]\OT1/LinuxLibertineT-TLF/b/n/12 Definici[]on 4.2. []\OT1/LinuxLibertineT-TL
 F/m/n/12 Sea $\OML/nxlmi/m/it/12 X$ \OT1/LinuxLibertineT-TLF/m/n/12 un es-pa-ci
 o con fun-cio-nes y sea $\OML/nxlmi/m/it/12 U \OMS/ntxsy/m/n/12 ^^Z \OML/nxlmi/
@@ -1480,36 +1480,36 @@ a/m/it/12 {\OML/nxlmi/m/it/12 U; \U/rsfs/m/n/12 O[]\U/ntxmia/m/it/12 |$
 
 [7] [8]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 12.0pt on input line 420.
+(Font)              scaled to size 12.0pt on input line 438.
  [9]
-Overfull \hbox (0.6891pt too wide) in paragraph at lines 467--468
+Overfull \hbox (0.6891pt too wide) in paragraph at lines 485--486
 []\OT1/LinuxLibertineT-TLF/m/n/12 Queremos cons-truir aho-ra un ob-je-to $\U/rs
 fs/m/n/12 O[]$ \OT1/LinuxLibertineT-TLF/m/n/12 que do-te a $[]\U/ntxmia/m/it/12
  {\OML/nxlmi/m/it/12 R\U/ntxmia/m/it/12 |$ \OT1/LinuxLibertineT-TLF/m/n/12 de l
 a es-truc-tu-ra de []espacio
  []
 
-[10] [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 541.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 541.
+[10] [11] [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 566.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 566.
  (./esquemas.aux
 LaTeX Info: Redefining \. on input line 20.
 LaTeX Info: Redefining \% on input line 20.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 541.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 541.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 566.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 566.
 Package rerunfilecheck Info: File `esquemas.out' has not changed.
 (rerunfilecheck)             Checksum: EAF39E7B98AD2A2E63D48B0323729A33;352.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 541.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 566.
  ) 
 Here is how much of TeX's memory you used:
- 22681 strings out of 494850
- 423686 string characters out of 6178025
+ 22766 strings out of 494850
+ 425669 string characters out of 6178025
  476770 words of memory out of 5000000
- 25407 multiletter control sequences out of 15000+600000
+ 25488 multiletter control sequences out of 15000+600000
  65665 words of font info for 157 fonts, out of 8000000 for 9000
  62 hyphenation exceptions out of 8191
- 56i,15n,84p,894b,991s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,15n,84p,894b,1156s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_zajy4r.enc}{/us
 r/share/texlive/texmf-dist/fonts/enc/dvips/newtx/libertinealt.enc}{/usr/share/t
 exlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_ehpgim.enc}{/usr/share/texlive
@@ -1525,19 +1525,20 @@ ne/LinLibertineTZ.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/newtx/f
 xlri-7letters.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/la
 txfont/lasy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/newtx/txex-bar.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/txfonts/txmia.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/t
-xfonts/txsy.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsya
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/newtx/zxlr.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/newtx/zxlri.pfb>
-Output written on esquemas.pdf (11 pages, 550540 bytes).
+share/texlive/texmf-dist/fonts/type1/public/newtx/rtxmi7.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/newtx/txex-bar.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/txfonts/txex.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/tx
+fonts/txmia.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsy.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/newtx/zxlr.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/newtx/zxlri.pfb>
+Output written on esquemas.pdf (12 pages, 562814 bytes).
 PDF statistics:
- 238 PDF objects out of 1000 (max. 8388607)
- 203 compressed objects within 3 object streams
- 68 named destinations out of 1000 (max. 500000)
+ 249 PDF objects out of 1000 (max. 8388607)
+ 212 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
  61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

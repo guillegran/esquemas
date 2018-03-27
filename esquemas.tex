@@ -127,7 +127,7 @@ En primer lugar vamos a repasar el formalismo de la Teoría de Categorías, que 
 
 Introducimos ahora la noción de functor, como «morfismo entre categorías».
 \begin{defn}
-  Sean $\cat_1$ y $\cat_2$ dos categorías. Un \emph{functor covariante} $F$ es una correspondencia de la forma:
+  Sean $\cat_1$ y $\cat_2$ dos categorías. Un \emph{functor (covariante)} $F$ es una correspondencia de la forma:
   \begin{enumerate}
     \item A cada objeto $X$ de $\cat_1$ le asigna un objeto $FX$ de $\cat_2$.
     \item Dados dos objetos $X,Y$ de $\cat_1$, a cada morfismo $f:X\rightarrow Y$ le asigna un morfismo $Ff:FX\rightarrow FY$.
@@ -158,6 +158,24 @@ El nombre de functor \emph{covariante} se entiende mejor con la noción de categ
   \item Se dice que $F$ es una \emph{equivalencia de categorías} si es completamente fiel y esencialmente sobreyectivo.
 \end{enumerate}
 \end{defn}
+
+Por último, damos la noción de \emph{transformación natural}, que podemos entender como los «morfismos entre functores».
+\begin{defn}
+  Sean dos categorías $\CC_1$ y $\CC_2$ y dos functores (covariantes) $F:\CC_1\rightarrow \CC_2$ y $G:\CC_1\rightarrow \CC_2$ una \emph{transformación natural de $F$ a $G$}, que denotamos por $\varphi:F\Rightarrow G$, es una asignación:
+  \begin{enumerate}
+    \item A cada objeto $X$ de $\CC_1$ le asocia un morfismo $\varphi_X:F(X) \rightarrow G(X)$ en $\CC_2$. Este morfismo se llama la \emph{componente de $\varphi$ en $X$}.
+    \item Para cada morfismo $f:X\rightarrow Y$ de $\CC_1$ las componentes hacen el siguiente diagrama conmutativo
+      \begin{center}
+	\begin{tikzcd}
+F(X)	  \arrow{rr}{F(f)}\arrow{dd}[anchor=east]{\varphi_X} && F(Y)\arrow{dd}[anchor=west]{\varphi_Y} \\ 
+	   && \\
+	   G(X)\arrow{rr}[anchor=south]{G(f)} && G(Y).
+	 \end{tikzcd}
+       \end{center}
+  \end{enumerate}
+  Si los functores $F$ y $G$ son contravariantes la definición es igual pero en el último diagrama se invierte la dirección de las flechas horizontales.
+\end{defn}
+  
 
 \section{Conjuntos afines}
 Para empezar a motivar la idea de esquema, empezamos recordando los conceptos básicos de la geometría algebraica clásica, a saber, la idea de \emph{conjunto afín}. Consideramos un cuerpo $k$ y su espacio afín $n$-dimensional, que denotaremos $\AA_k^n$.
@@ -482,7 +500,14 @@ El primer problema se debe a que los conjuntos algebraicos están necesariamente
 	  \end{equation*}
 	  entonces existe una única $f\in \FF(U)$ tal que, para todo $\alpha$, $f_{\alpha}=\res_{U,U_{\alpha}}(f)$.
 
-	  Entendemos por un \emph{morfismo de haces} una transformación natural entre dos haces $\FF\rightarrow \FF'$ en $X$ con valores en $\CC$.
+	  Entendemos por un \emph{morfismo de haces} una transformación natural entre dos haces $\varphi:\FF\Rightarrow \FF'$ en $X$ con valores en $\CC$. Esto es, una asignación que a cada abierto $U\subset X$ le asocia un morfismo $\varphi_U:\FF(U) \rightarrow \FF'(U)$ en $\CC$ y, si $U\subset V \subset X$ son abiertos, entonces el siguiente diagrama conmuta
+	  \begin{center}
+	    \begin{tikzcd}
+	      \FF(V)	      \arrow{rr}{\res_{V,U}}\arrow{dd}[anchor=east]{\varphi_V} && \FF(U)\arrow{dd}[anchor=west]{\varphi_U} \\ 
+	       && \\
+	       \FF'(V)\arrow{rr}[anchor=south]{\res'_{V,U}} && \FF'(U).
+	     \end{tikzcd}
+	   \end{center}
 
 	  Si $\FF$ es un haz en $X$ y $U\subset X$ es un abierto, podemos definir el \emph{haz restringido} $\FF|_{U}$ de forma que $\FF|_{U}(V)=\FF(V)$ para cada abierto relativo $V\subset U$.
 
