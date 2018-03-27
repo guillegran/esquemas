@@ -42,7 +42,10 @@
 
 
 \def\CC{\mathscr{C}}
+\def\cat{\mathscr{C}}
+\def\FF{\mathscr{F}}
 \def\sp{\mathrm{Spec}}
+\def\res{\mathrm{res}}
 \def\pp{\mathfrak{p}}
 \def\AA{\mathbb{A}}
 \def\ZZ{\mathbb{Z}}
@@ -55,7 +58,6 @@
 \def\cc{\mathbf{c}}
 \def\gf{\pi_1}
 \def\obj{\mathrm{Obj}}
-\def\cat{\mathbf{C}}
 \def\top{\mathbf{Top}}
 \def\htop{\mathbf{hTop}}
         \def\grp{\mathbf{Grp}}
@@ -93,6 +95,70 @@
 \maketitle
 \section*{Introducción}
 En este trabajo vamos a dar una introducción a los esquemas, que constituyen la base de toda la geometría algebraica moderna. (\emph{continuar})
+\section{Conceptos básicos de Teoría de Categorías}
+En primer lugar vamos a repasar el formalismo de la Teoría de Categorías, que ofrece un marco muy general en el que estudiar ciertas propiedades de los objetos matemáticos. En Geometría Algebraica, muchas de las ideas de esta teoría aparecen de forma natural y su estudio puede ayudar a entender mejor qué es lo que está pasando detrás a parte de que, una vez se coge cierta habilidad, permiten hacer ciertas demostraciones de forma más cómoda y elegante.
+
+\begin{defn}
+  Una \emph{categoría} $\cat$ consta de
+  \begin{enumerate}
+    \item Una colección de \emph{objetos} que denotamos por $\obj(\cat)$.
+    \item Para cualesquiera dos objetos $X,Y$, un conjunto de flechas $X\rightarrow Y$ entre estos objetos, llamado \emph{morfismos entre $X$ e $Y$}, que denotamos por $\cat(X,Y)$
+    \item Una \emph{ley de composición}, para cualesquiera tres objetos $X,Y,Z$
+      \begin{align*}
+	\cat(X,Y)\times \cat(Y,Z)&\longrightarrow \cat(X,Z)\\ 
+	  (f,g) &\longmapsto g\circ f,
+	\end{align*}
+ tal que cumple:
+ \begin{enumerate}
+   \item \textit{Propiedad asociativa}: Dados morfismos $f:X\rightarrow Y$, $g:Y\rightarrow Z$ y $h:Z\rightarrow W$,
+     \begin{equation*}
+       (h\circ g)\circ f = h\circ(g\circ f).
+     \end{equation*}
+   \item \textit{Elemento identidad}: Para todo objeto $X$ existe un morfismo $\id_X:X\rightarrow X$ tal que, si $Y$ es otro objeto, $f:X\rightarrow Y$, $g:Y\rightarrow X$, entonces
+     \begin{equation*}
+       \begin{cases}
+	 f\circ \id_X=f, \text{ y} \\
+	 \id_X\circ g=g.
+       \end{cases}
+     \end{equation*}
+ \end{enumerate}
+  \end{enumerate}
+\end{defn}
+
+Introducimos ahora la noción de functor, como «morfismo entre categorías».
+\begin{defn}
+  Sean $\cat_1$ y $\cat_2$ dos categorías. Un \emph{functor covariante} $F$ es una correspondencia de la forma:
+  \begin{enumerate}
+    \item A cada objeto $X$ de $\cat_1$ le asigna un objeto $FX$ de $\cat_2$.
+    \item Dados dos objetos $X,Y$ de $\cat_1$, a cada morfismo $f:X\rightarrow Y$ le asigna un morfismo $Ff:FX\rightarrow FY$.
+    \item Dados tres objetos $X,Y,Z$ de $\cat_1$, y dos morfismos $f:X\rightarrow Y$ y $g:Y\rightarrow Z$, $F(g\circ f)=Fg \circ Ff$, es decir, $F$ lleva diagramas conmutativos de $\cat_1$ a diagramas conmutativos de $\cat_2$ respetando la dirección de las flechas. Además, ha de cumplirse que para cualquier objeto $X$ de $\cat_1$ $F\id_X=\id_{FX}$.
+  \end{enumerate}
+\end{defn}
+
+El nombre de functor \emph{covariante} se entiende mejor con la noción de categoría \emph{dual}.
+
+\begin{defn}
+  La categoría \emph{dual u opuesta} de una categoría $\CC$ es la categoría $\CC^{op}$ con los mismos objetos que $\CC$ y cuyos morfismos son, para dos objetos $X$ e $Y$ de $\CC^{op}$, $\CC^{op}(X,Y)=\CC(Y,X)$.
+
+  Un \emph{functor contravariante} $F$ entre dos categorías $\CC_1$ y $\CC_2$ es un functor covariante entre $\CC_1^{op}$ y $\CC_2$.
+\end{defn}
+
+\begin{defn}
+  Sea un functor $F:\CC_1 \rightarrow \CC_2$. 
+  \begin{enumerate}
+\item Se dice que $F$ es \emph{fiel} (respectivamente, \emph{completamente fiel}) si para todos los objetos $X$ e $Y$ de $\CC_1$ la aplicación 
+  \begin{align*}
+     \CC_1(X.Y)&\longrightarrow \CC_2(F(X),F(Y))\\ 
+      f &\longmapsto F(f),
+    \end{align*}
+    es inyectiva (respectivamente, biyectiva). 
+
+  \item Se dice que $F$ es \emph{esencialmente sobreyectivo} si para cada objeto $Y$ de $\CC_2$ existe un objeto $X$ de $\CC_1$ y un isomorfismo $F(X)\cong Y$.
+
+  \item Se dice que $F$ es una \emph{equivalencia de categorías} si es completamente fiel y esencialmente sobreyectivo.
+\end{enumerate}
+\end{defn}
+
 \section{Conjuntos afines}
 Para empezar a motivar la idea de esquema, empezamos recordando los conceptos básicos de la geometría algebraica clásica, a saber, la idea de \emph{conjunto afín}. Consideramos un cuerpo $k$ y su espacio afín $n$-dimensional, que denotaremos $\AA_k^n$.
 \begin{defn}
@@ -366,7 +432,7 @@ El primer problema se debe a que los conjuntos algebraicos están necesariamente
       \end{defn}
 
       \section{Esquemas afines}
-      La teoría de esquemas surge a la hora de generalizar la idea de variedad a anillos más generales que los cuerpos algebraicamente cerrados. Para ello, dado un anillo $R$, tenemos que construir un espacio topológico $X$ y un conjunto de funciones $\OO_X$ que nos pueda hacer ahora las veces de «espacio afín» asociado a $R$.
+      La teoría de esquemas surge a la hora de generalizar la idea de variedad a anillos más generales que los cuerpos algebraicamente cerrados. Para ello, dado un anillo $R$, tenemos que construir un espacio topológico $X$ y un «conjunto de funciones» $\OO_X$ que nos pueda hacer ahora las veces de «variedad afín».
 
       Comencemos por estudiar el espacio topológico que vamos a asociar a cada anillo, que no será otra cosa que su \emph{espectro}.
       \begin{defn}
@@ -398,7 +464,80 @@ El primer problema se debe a que los conjuntos algebraicos están necesariamente
 	\end{equation*}
 	que a cada anillo $R$ le asigna $\sp(R)$ y a cada homomorfismo de anillos $f:R\rightarrow S$ le asigna la aplicación continua $f_*:\sp(S)\rightarrow \sp(R)$.
 
+	Queremos construir ahora un objeto $\OO_{\sp(R)}$ que dote a $\sp(R)$ de la estructura de «espacio con funciones». En este caso, no es tan directo como considerar simplemente álgebras de funciones a un cuerpo, si no que necesitamos estudiar un caso más general. Para ello, basta fijarse en la estructura característica que presentaban estos espacios con funciones, que será lo que de forma natural nos de la noción de \emph{haz}.
+
+	En primer lugar, si $X$ es un espacio topológico, consideremos la categoría pequeña $\mathbf{Op}_X$ cuyos objetos son los abiertos de $X$ y, si $U, V \subset X$ son abiertos, $\mathbf{Op}_X(U,V)$ es vacío si $U\not\subset V$ y consiste de la inclusión $U\hookrightarrow V$ si $U\subset V$.
+	\begin{defn}
+	  Sea $X$ un espacio topológico y $\CC$ una categoría. Un \emph{prehaz con valores en $\CC$} en $X$ es un functor contravariante $\FF$ de la categoría $\mathbf{Op}_X$ a $\CC$. 
+	\end{defn}
+	El prehaz $\FF$ le asigna a cada abierto $U\subset X$ un objeto de la categoría $\CC$ y a cada inclusión $U\hookrightarrow V$ un morfismo $\res_{V,U}:\FF(V)\rightarrow \FF(U)$. De la functorialidad se deduce que $\res_{U,U}=\mathrm{id}_U$ y que si $U\hookrightarrow V \hookrightarrow W$, entonces 
+	\begin{equation*}
+	  \res_{V,U}\circ \res_{W,V}=\res_{W,U}.
+	\end{equation*}
+	Nótese que la functorialidad se corresponde con la idea de que restringir una función al espacio de partida no hace nada y de que restringir dos veces es lo mismo que hacerlo una sola vez. En particular, si $(X,\OO_X)$ es un espacio con funciones, $\OO_X$ es un prehaz en $X$ con valores en la categoría de las $K$-subálgebras de $\mathbf{Sets}(X,K)$. Para verificar el axioma de pegado necesitamos una noción algo más fuerte.
+	\begin{defn}
+	  Sean $X$ un espacio topológico, $\CC$ una categoría y $\FF$ un prehaz en $X$ con valores en $\CC$. Decimos que $X$ es un \emph{haz} si para todo $U\subset X$ abierto, para todo $\left\{ U_{\alpha} \right\}$ recubrimiento abierto de $U$ y para cada $f_{\alpha}\in \FF(U_{\alpha})$ se cumple que si para cualesquiera $\beta,\gamma$
+	  \begin{equation*}
+	    \res_{U_{\beta},U_{\beta}\cap U_{\gamma}}(f_{\beta})=\res_{U_{\gamma},U_{\beta}\cap U_{\gamma}}(f_{\gamma}),
+	  \end{equation*}
+	  entonces existe una única $f\in \FF(U)$ tal que, para todo $\alpha$, $f_{\alpha}=\res_{U,U_{\alpha}}(f)$.
+
+	  Entendemos por un \emph{morfismo de haces} una transformación natural entre dos haces $\FF\rightarrow \FF'$ en $X$ con valores en $\CC$.
+
+	  Si $\FF$ es un haz en $X$ y $U\subset X$ es un abierto, podemos definir el \emph{haz restringido} $\FF|_{U}$ de forma que $\FF|_{U}(V)=\FF(V)$ para cada abierto relativo $V\subset U$.
+
+	  Si $X$ e $Y$ son espacios topológicos, $\FF$ es un haz en $X$ y $f:X\rightarrow Y$ es una aplicación continua, podemos definir en $Y$ el \emph{haz pushforward} $f_*\FF$ tal que $(f_*\FF) (U)=\FF(f^{-1}\left( U \right))$ para cada abierto $U\subset Y$.
+	\end{defn}
+
+	\begin{obs}
+	  Por la propiedad de pegado, para definir un haz en un espacio topológico, basta hacerlo en una base de su topología.
+	\end{obs}
+
+	Veamos ahora como podemos aplicar la teoría de haces al caso de estudio.
+	\begin{defn}
+	  Sea $X$ un espacio topológico y $\OO_X$ un haz en $X$ con valores en la categoría $\mathbf{CRings}$ cuyos objetos son los anillos conmutativos unitarios. Decimos que el par $(X,\OO_X)$ es un \emph{espacio anillado}.
+
+	  Sea $R$ un anillo y $\sp(R)$ el espacio topológico formado por el espectro de $R$ con la topología de Zariski. Se define el \emph{haz de estructura} de $\sp(R)$ como el haz $\OO_{\sp(R)}$ que en cada abierto principal $D(f)$ es de la forma $\OO_{\sp(R)}(D(f))=R_f$. 
+
+	  A partir de ahora nos referiremos por $\sp(R)$ al espacio anillado $(\sp(R),\OO_{\sp(R)})$. Un espacio anillado de este tipo se llama \emph{esquema afín} sobre $R$.
+	\end{defn}
+
+	El estudio de estas ideas es análogo al que hicimos para los conjuntos afines. De hecho, se tiene el siguiente teorema.
+	\begin{thm}
+	  El functor $\sp$ que a cada anillo $R$ le asocia el esquema afín $\sp(R)$ induce una equivalencia de categorías
+	  \begin{equation*}
+	    \mathbf{CRing}^{op}\longleftrightarrow \mathbf{AffSch},
+	  \end{equation*}
+	  donde $\mathbf{AffSch}$ es la categoría de los esquemas afines.
+	\end{thm}
+
+	\begin{ejemplo}
+	  Veamos ahora algunos ejemplos de esquemas afines.
+\begin{enumerate}
+  \item Si $K$ es un cuerpo, $\sp(K)$ es un conjunto unipuntual $\star$ y $\OO_{\sp(K)}(\star)=K$.
+  \item Si consideramos el anillo de los números enteros $\ZZ$, $\sp(\ZZ)$ tiene un punto por cada número primo $p$, correspondiente al ideal maximal $(p)=p\ZZ$ y un punto no cerrado correspondiente al ideal $(0)$.
+  \item Si $K$ es un cuerpo y $R=K[X]/(X^2)$, entonces $R$ tiene sólo un ideal primo $(X)$ así que $\sp(R)=\left\{ (X) \right\}$ y $\OO_{\sp(R)}=K[X]/(X^2)=R$. La clave aquí es que las funciones ya no estań determinadas por sus valores, ya que la función $(X)$ es cero en todo punto, pero no es la función nula.
+\end{enumerate}
+	\end{ejemplo}
+
+	Cabe preguntarse entonces cómo podemos entender los elementos de $R$ como funciones sobre $\sp(R)$. Nótese que, si $\pp \in \sp(R)$, tenemos las siguientes aplicaciones canónicas
+	\begin{center}
+	  \begin{tikzcd}
+	    R \arrow{r}{} & R/\pp \arrow{r}{} & K(\pp),	    
+	  \end{tikzcd}
+	\end{center}
+	donde $K(p)=\mathrm{qf}(R/\pp)$ es el cuerpo de fracciones de $R/\pp$. De modo que para un elemento $f\in R$ podemos definir $f(\pp)$ como la imagen de $f$ por esta aplicación. Sin embargo, no siempre se obtienen funciones «de verdad», por ejemplo, si consideramos $\sp(\ZZ)$ y tomamos $f=7\in \ZZ$. Entonces, si $p$ es un número primo,
+	\begin{align*}
+	  \ZZ&\longrightarrow \ZZ/(p)=\mathbb{F}_p\\ 
+	  f &\longmapsto f\left( (p) \right)=7 \text{ mod } p. 
+	  \end{align*}
+	  Por ejemplo, $f\left( (2) \right)= 1$ en $\mathbb{F}_2$ y $f( (5) )=2$ en $\mathbb{F}_5$, pero los valores de $f$ caen en cuerpos distintos para distintos valores de $\sp(\ZZ)$. Aún así, sigue teniendo sentido hablar del conjunto $\left\{ \pp \in \sp(R) | f(\pp)=0 \right\}$. Además, si recordamos del caso de los conjuntos afines, si $k$ es un cuerpo algebraicamente cerrado y $R=k[X_1,\dots,X_n]$, entonces para cada ideal maximal $\mm$ de $R$, $R\rightarrow R/\mm =k$, de modo que los elementos de $R$ sí que son realmente funciones.
       
+	  \section{Esquemas}
+	  Igual que introdujimos la noción de variedad, construimos un \emph{esquema} como un espacio anillado que admita un «atlas» (en principio no pedimos que sea finito) de esquemas afines.
+	  \begin{defn}
+	    Un \emph{esquema} es un espacio anillado $(X,\OO_X)$ que es \emph{localmente afín} en el sentido de que existe un recubrimiento abierto $\{U_{\alpha}\}$ de $X$ tal que para todo $\alpha$ $(U_{\alpha}, \OO_X|_{U_{\alpha}})$ es un esquema afín.
+	  \end{defn}
 \end{document}
 
 
